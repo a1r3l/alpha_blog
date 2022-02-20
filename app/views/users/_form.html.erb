@@ -1,0 +1,22 @@
+<%= form_with(model: @user) do |form| %>
+  <%= render 'messages/errors', obj: @user %>
+
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Sign Up" %>
+  </div>
+<% end %>
