@@ -2,7 +2,7 @@
 
 <%= gravatar_for @user, size: 200 %>
 
-<div> <%= link_to "Edit my profile", edit_user_path if logged_in? && @user == current_user %> </div>
+<div> <%= link_to "Edit my profile", edit_user_path if logged_in? && (@user == current_user || current_user.admin?) %> </div>
 
 <h3> Articles </h3>
 <div class="flickr_pagination">

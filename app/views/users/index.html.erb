@@ -19,7 +19,8 @@
     </div>
     <div class="articles-actions"> 
       <span> <%= link_to "View Profile", user %>
-      </span> <%= link_to "Edit Profile", edit_user_path(user) if logged_in? && user == current_user %><span></span>
+      </span> <%= link_to "Edit Profile", edit_user_path(user) if logged_in? && (user == current_user || current_user.admin?) %><span></span>
+      </span> <%= link_to "Delete Profile", user_path(user), method: :delete if logged_in? && (user == current_user || current_user.admin?) %><span></span>
     </div>
     <div class="user-created-at"> Joined <%= time_ago_in_words(user.created_at) %> ago </div>
   <% end %>

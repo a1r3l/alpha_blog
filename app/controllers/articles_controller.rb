@@ -72,8 +72,8 @@ class ArticlesController < ApplicationController
     end
 
     def require_article_author
-      if current_user != @article.user
-        flash[:alert] = "YOu only can modify your own articles!"
+      if current_user != @article.user && !current_user.admin?
+        flash[:alert] = "You only can modify your own articles!"
         redirect_to @article
       end
     end
