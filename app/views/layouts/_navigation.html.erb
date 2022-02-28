@@ -13,7 +13,7 @@
     <% if logged_in? %>
         <div class="dropdown">
             <button class="dropbtn">
-                Profile [<%= current_user.username %>]
+                <%= "(Admin)" if current_user.admin? %> Profile [<%= current_user.username %>]
                  <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
