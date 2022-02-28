@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :require_user, except: [:show, :index]
+  before_action :require_article_author, only: [:edit, :update, :destroy]
 
   # GET /articles or /articles.json
   def index
@@ -22,7 +24,7 @@ class ArticlesController < ApplicationController
   # POST /articles or /articles.json
   def create
     @article = Article.new(article_params)
-    @article.user = User.first
+    @article.user = current_user
 
     respond_to do |format|
       if @article.save
@@ -67,5 +69,12 @@ class ArticlesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def article_params
       params.require(:article).permit(:title, :description)
+    end
+
+    def require_article_author
+      if current_user != @article.user
+        flash[:alert] = "YOu only can modify your own articles!"
+        redirect_to @article
+      end
     end
 end

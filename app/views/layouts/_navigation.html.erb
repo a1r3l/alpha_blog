@@ -1,0 +1,30 @@
+<div class="navbar">
+  <%= link_to "Alpha Blog", root_path %>
+  <%= link_to "Bloggers", users_path %>
+  <div class="dropdown">
+    <button class="dropbtn"> Articles
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+        <%= link_to "Create New Article", new_article_path if logged_in? %>
+        <%= link_to "View Articles", articles_path %>
+    </div>
+  </div>
+    <% if logged_in? %>
+        <div class="dropdown">
+            <button class="dropbtn">
+                Profile [<%= current_user.username %>]
+                 <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <%= link_to "View your Profile", user_path(current_user) %>
+                <%= link_to "Edit Your Profile", edit_user_path(current_user) %>
+                <%= link_to "Delete Your Profile", user_path(current_user), method: :delete, data: { confirm: "Are you sure?" }%>
+            </div>
+        </div>
+        <%= link_to "Log out" , logout_path, method: :delete %>
+    <% else %>
+        <%= link_to "Log In" , login_path %>
+        <%= link_to "Sign Up" , signup_path %>
+    <% end%>
+</div>
