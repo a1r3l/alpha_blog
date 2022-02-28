@@ -10,6 +10,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="nav-bar"> <%= render 'layouts/navigation' %> </div>
+    <div id="app">
+      <%= yield %>
+    </div>
   </body>
 </html>
